@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall -Iheaders
 TARGET = main
-SRC = src/main.cpp src/Graph.cpp
+SRC = src/main.cpp src/Graph.cpp src/Node.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(TARGET)

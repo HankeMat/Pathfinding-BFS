@@ -1,24 +1,22 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
+#include <fstream>
 #include <queue>
 #include <climits>
+#include "Node.hpp"
 
 using namespace std;
 
-struct Vertex {
-    char value;
-    int row;
-    int col;
-};
-
 class Graph {
-private:
-    vector<vector<Vertex>> grid;
 public:
-    Graph(vector<vector<char>>& inputGrid);
+    int rows, cols;
+    vector<Node*> grid;
 
-    void initializeEdges();
-    int findShortestPath(Vertex start, Vertex finish);
+    Graph(int rows, int cols, vector<Node*> nodes);
+    int coords(int x, int y);
+    bool isValid(Node* node);
+    void initNeighbors();
+    
+    // int findShortestPath(Node start, Node finish);
 };
