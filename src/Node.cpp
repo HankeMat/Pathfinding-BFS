@@ -13,3 +13,10 @@ Node::Node(int id, int x, int y, int elevation){
     this->y = y;
     this->elevation = elevation;
 }
+
+void Node::printNeighborsIDs(){
+    for (auto neighborId : this->neighborsIDs) {
+        cout << neighborId << ", ";
+    }
+    cout << endl;
+}

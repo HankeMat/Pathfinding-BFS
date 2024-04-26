@@ -1,12 +1,5 @@
 #pragma once
-
-#include <iostream>
-#include <fstream>
-#include <queue>
-#include <climits>
 #include "Node.hpp"
-
-using namespace std;
 
 class Graph {
 public:
@@ -16,6 +9,7 @@ public:
     Graph(int rows, int cols, vector<Node*> nodes);
     int coords(int x, int y);
     bool isValid(Node* node);
+    bool checkElevation(Node* current, Node* neighbor);
     void initNeighbors();
     
     // int findShortestPath(Node start, Node finish);

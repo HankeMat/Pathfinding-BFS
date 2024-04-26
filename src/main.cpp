@@ -36,7 +36,14 @@ int main(int argc, char const *argv[]) {
     file.close();
 
     Graph g(rows, cols, nodes);
+
     g.initNeighbors();
+
+
+    for (int i = 0; i < (g.cols*g.rows); i++) {
+        g.grid[i]->printNeighborsIDs();
+    }
+    //cout << g.grid[g.coords(3,3)]->neighbors[0]->x << endl << g.grid[g.coords(3,3)]->neighbors[0]->y << endl;
     
 
     // // Start and finish vertices

@@ -11,33 +11,38 @@ int Graph::coords(int x, int y){
     return (y * this->cols) + x;
 }
 
-bool Graph::isValid(Node* node){
-    if (node->x >= 0 && node->x < this->cols && node->y >= 0 && node->y < this->rows) {
+// bool Graph::isValid(Node* node){
+//     if (node->x >= 0 && node->x < this->cols && node->y >= 0 && node->y < this->rows) {
+//         return true;
+//     }
+//     return false;
+// }
+
+bool Graph::checkElevation(Node* current, Node* neighbor){
+    if (current->elevation == neighbor->elevation || current->elevation + 1 == neighbor->elevation) {
         return true;
     }
     return false;
 }
 
 void Graph::initNeighbors(){
-    int index = 0;
     for (int i = 0; i < (this->cols*this->rows); i++) {
-        if (this->isValid(this->grid[this->coords(this->grid[i]->x, this->grid[i]->y-1)]) && (this->grid[this->coords(this->grid[i]->x, this->grid[i]->y-1)]->elevation == this->grid[i]->elevation || this->grid[this->coords(this->grid[i]->x, this->grid[i]->y-1)]->elevation == this->grid[i]->elevation+1)) {
-            this->grid[i]->neighbors[index++] = this->grid[this->coords(this->grid[i]->x, this->grid[i]->y-1)];
+        // Upper neighbor
+        if ((i - this->cols) >= 0 && this->checkElevation(this->grid[i], this->grid[i - this->cols])) {
+            this->grid[i]->neighborsIDs.push_back(this->grid[i - this->cols]->id);
         }
-
-        if (this->isValid(this->grid[this->coords(this->grid[i]->x+1, this->grid[i]->y)]) && (this->grid[this->coords(this->grid[i]->x+1, this->grid[i]->y)]->elevation == this->grid[i]->elevation || this->grid[this->coords(this->grid[i]->x+1, this->grid[i]->y)]->elevation == this->grid[i]->elevation+1)) {
-            this->grid[i]->neighbors[index++] = this->grid[this->coords(this->grid[i]->x+1, this->grid[i]->y)];
+        // Right neighbor
+        if ((i + 1) % this->cols != 0 && this->checkElevation(this->grid[i], this->grid[i + 1])) {
+            this->grid[i]->neighborsIDs.push_back(this->grid[i + 1]->id);
         }
-
-        if (this->isValid(this->grid[this->coords(this->grid[i]->x, this->grid[i]->y+1)]) && (this->grid[this->coords(this->grid[i]->x, this->grid[i]->y+1)]->elevation == this->grid[i]->elevation || this->grid[this->coords(this->grid[i]->x, this->grid[i]->y+1)]->elevation == this->grid[i]->elevation+1)) {
-            this->grid[i]->neighbors[index++] = this->grid[this->coords(this->grid[i]->x, this->grid[i]->y+1)];
+        // Bottom neighbor
+        if ((i + this->cols) < (this->cols*this->rows) && this->checkElevation(this->grid[i], this->grid[i + this->cols])) {
+            this->grid[i]->neighborsIDs.push_back(this->grid[i + this->cols]->id);
         }
-
-        if (this->isValid(this->grid[this->coords(this->grid[i]->x-1, this->grid[i]->y)]) && (this->grid[this->coords(this->grid[i]->x-1, this->grid[i]->y)]->elevation == this->grid[i]->elevation || this->grid[this->coords(this->grid[i]->x-1, this->grid[i]->y)]->elevation == this->grid[i]->elevation+1)) {
-            this->grid[i]->neighbors[index++] = this->grid[this->coords(this->grid[i]->x-1, this->grid[i]->y)];
+        // Left neighbor
+        if (i % this->cols != 0  && this->checkElevation(this->grid[i], this->grid[i - 1])) {
+            this->grid[i]->neighborsIDs.push_back(this->grid[i - 1]->id);
         }
-
-        index = 0;
     }
 }
 
