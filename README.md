@@ -6,14 +6,14 @@
 1. The algorithm can go to the same or one higher elevation only (from 'c' can go to another 'c' or 'd', but not to 'b' nor 'e')
 2. It starts in S and goes to E
 3. It finds the shortest possible way to get from S to E
-**Figure 1**
-5
-8
-Sabqponm
-abcryxxl
-accszExk
-acctuvwj
-abdefghi
+*Figure 1*
+5<br>
+8<br>
+Sabqponm<br>
+abcryxxl<br>
+accszExk<br>
+acctuvwj<br>
+abdefghi<br>
 
 ## Build
 - This part should be easy. In the project is Makefile included so just run this command to compile the code
