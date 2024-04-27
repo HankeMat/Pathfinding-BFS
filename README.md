@@ -25,7 +25,8 @@ make
 ```
 ./main pathToTheMapFile.txt
 ```
-- The project also contains test map which is called inputFile.txt so here you can test it out:
+- The project also contains 2 test maps that are called test1.txt and test2.txt so here you can test it out:
 ```
-./main inputFile.txt
+./main test1.txt
+./main test2.txt
 ```
