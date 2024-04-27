@@ -41,16 +41,20 @@ int main(int argc, char const *argv[]) {
     Graph g(rows, cols, nodes);
     g.initNeighbors();
     vector<Node*> shortestPath = g.BFS(startNode, endNode);
+    reverse(shortestPath.begin(), shortestPath.end());
     // reverse shortestPath for correct printing ... also remember to change the 'S' in the if inside the for loop to 'E'
-    cout << "Path: ";
-    for (auto node : shortestPath) {
-        if (node->character == 'S') {
-            cout << node->character;
-            break;
-        } else 
-            cout << node->character << " -> ";
+    if (shortestPath.size()-1 == 0) {
+        cout << "There is no possible path to go through" << endl;
+    } else {
+        cout << "Path: ";
+        for (auto node : shortestPath) {
+            if (node->character == 'E') {
+                cout << node->character;
+                break;
+            } else 
+                cout << node->character << "-";
+        }
+        cout << endl << "Shortest path length: " << shortestPath.size()-1 << endl;
     }
-    cout << endl << "Shortest path length: " << shortestPath.size()-1 << endl;
-    
     return 0;
 }
