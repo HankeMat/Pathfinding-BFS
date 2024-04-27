@@ -11,6 +11,5 @@ public:
     bool isValid(Node* node);
     bool checkElevation(Node* current, Node* neighbor);
     void initNeighbors();
-    
-    // int findShortestPath(Node start, Node finish);
+    vector<Node*> BFS(Node* start, Node* end);
 };

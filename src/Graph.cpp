@@ -46,37 +46,32 @@ void Graph::initNeighbors(){
     }
 }
 
-// int Graph::findShortestPath(Node start, Node finish) {
-//     vector<vector<bool>> visited(this->grid.size(), vector<bool>(this->grid[0].size(), false));
-//     queue<pair<Node, int>> q;
-//     q.push({start, 0});
-//     visited[start.row][start.col] = true;
+vector<Node*> Graph::BFS(Node* start, Node* end) {
+    queue<Node*> que;
+    que.push(start);
+    start->color = 1;
+    unordered_map<Node*, Node*> parentMap;
 
-//     while (!q.empty()) {
-//         Node current = q.front().first;
-//         int distance = q.front().second;
-//         q.pop();
+    while (!que.empty()) {
+        Node* current = que.front();
+        que.pop();
+        current->color = 2;
 
-//         if (current.row == finish.row && current.col == finish.col) {
-//             return distance;
-//         }
+        for (auto neighborID : current->neighborsIDs) {
+            Node* neighbor = this->grid[neighborID];
+            if (neighbor->color == 0) {
+                que.push(neighbor);
+                neighbor->color = 1;
+                parentMap[neighbor] = current;
+            }
+        }
+    }
 
-//         // Explore neighbors
-//         for (int dx = -1; dx <= 1; ++dx) {
-//             for (int dy = -1; dy <= 1; ++dy) {
-//                 if (dx == 0 && dy == 0) continue;
-//                 int newRow = current.row + dx;
-//                 int newCol = current.col + dy;
-//                 if (newRow >= 0 && newRow < this->grid.size() && newCol >= 0 && newCol < this->grid[newRow].size()) {
-//                     if (!visited[newRow][newCol]) {
-//                         q.push({this->grid[newRow][newCol], distance + 1});
-//                         visited[newRow][newCol] = true;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-//     // If no path found
-//     return -1;
-// }
+    vector<Node*> shortestPath;
+    Node* currentNode = end;
+    while (currentNode != nullptr) {
+        shortestPath.push_back(currentNode);
+        currentNode = parentMap[currentNode];
+    }
+    return shortestPath;
+}

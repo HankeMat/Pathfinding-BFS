@@ -1,4 +1,3 @@
-#include <string>
 #include "Graph.hpp"
 
 int main(int argc, char const *argv[]) {
@@ -14,20 +13,24 @@ int main(int argc, char const *argv[]) {
     string line;
     long id = 0;
     int j = 0;
-
+    Node* startNode = new Node();
+    Node* endNode = new Node();
     while (!file.eof()) {
         file >> line;
         for (int i = 0; i < cols; i++) {
             Node* node = new Node();
+            node->character = line[i];
             node->id = id++;
             node->x = i;
             node->y = j;
             if (line[i] != 'S' && line[i] != 'E') {
                 node->elevation = line[i] - 'a';
             } else if (line[i] == 'S') {
-                node->elevation = 0;
+                node->elevation = -1;
+                startNode = node;
             } else if(line[i] == 'E') {
                 node->elevation = 26;
+                endNode = node;
             }
             nodes.push_back(node);
         }
@@ -36,26 +39,18 @@ int main(int argc, char const *argv[]) {
     file.close();
 
     Graph g(rows, cols, nodes);
-
     g.initNeighbors();
-
-
-    for (int i = 0; i < (g.cols*g.rows); i++) {
-        g.grid[i]->printNeighborsIDs();
+    vector<Node*> shortestPath = g.BFS(startNode, endNode);
+    // reverse shortestPath for correct printing ... also remember to change the 'S' in the if inside the for loop to 'E'
+    cout << "Path: ";
+    for (auto node : shortestPath) {
+        if (node->character == 'S') {
+            cout << node->character;
+            break;
+        } else 
+            cout << node->character << " -> ";
     }
-    //cout << g.grid[g.coords(3,3)]->neighbors[0]->x << endl << g.grid[g.coords(3,3)]->neighbors[0]->y << endl;
+    cout << endl << "Shortest path length: " << shortestPath.size()-1 << endl;
     
-
-    // // Start and finish vertices
-    // Node start = { .value = 'a', .row = 0, .col = 0 };
-    // Node finish = { .value = 'f', .row = 3, .col = 2};
-
-    // int shortestPath = graph.findShortestPath(start, finish);
-    // if (shortestPath != -1) {
-    //     cout << "Shortest path length: " << shortestPath << endl;
-    // } else {
-    //     cout << "No path found." << endl;
-    // }
-
     return 0;
 }
