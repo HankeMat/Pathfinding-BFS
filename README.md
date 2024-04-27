@@ -5,8 +5,8 @@
 - Each character represents its elevation and algorithm searches for the shortest possible path from 'S' to 'E' adhering to the following rules:
 1. The algorithm can go to the same or one higher elevation only (from 'c' can go to another 'c' or 'd', but not to 'b' nor 'e')
 2. It starts in S and goes to E
-3. It finds the shortest possible way to get from S to E
-*Figure 1*
+3. It finds the shortest possible way to get from S to E<br>
+*Figure 1*<br>
 5<br>
 8<br>
 Sabqponm<br>
