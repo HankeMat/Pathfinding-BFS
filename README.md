@@ -25,8 +25,14 @@ make
 ```
 ./main pathToTheMapFile.txt
 ```
-- The project also contains 2 test maps that are called test1.txt and test2.txt so here you can test it out:
+- The project also contains 4 test maps that are called testX.txt so here you can test it out:
 ```
 ./main test1.txt
 ./main test2.txt
+./main test3.txt
+./main test4.txt
 ```
+1. test1 - simple map with one path to go through
+2. test2 - complex map with one path to go through
+3. test3 - complex map with more paths to go through (finds the shortest)
+3. test4 - complex map with no path to go through
