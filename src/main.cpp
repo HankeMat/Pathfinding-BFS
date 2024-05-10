@@ -1,5 +1,16 @@
+/**
+ * @file main.cpp
+ * @author Matej Hanke (HAN0390@vsb.cz)
+ */
 #include "Graph.hpp"
 
+/**
+ * @brief The main function that opens a file with map given via argument, reads and performs a BFS search within Graph data structure
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char const *argv[]) {
     ifstream file(argv[1]);
     if (!file.is_open()) {
