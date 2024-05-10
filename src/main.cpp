@@ -42,7 +42,6 @@ int main(int argc, char const *argv[]) {
     g.initNeighbors();
     vector<Node*> shortestPath = g.BFS(startNode, endNode);
     reverse(shortestPath.begin(), shortestPath.end());
-    // reverse shortestPath for correct printing ... also remember to change the 'S' in the if inside the for loop to 'E'
     if (shortestPath.size()-1 == 0) {
         cout << "There is no possible path to go through" << endl;
     } else {
